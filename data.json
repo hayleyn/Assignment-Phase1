@@ -1,0 +1,114 @@
+{
+    "users": [
+      {
+        "id": "6518dd0e-bda5-4d4d-944f-f750132f1a41",
+        "username": "super",
+        "email": "super@example.com",
+        "password": "123",
+        "roles": [
+          "SUPER"
+        ],
+        "groups": [
+          "ec0cf1d3-1a5a-4d12-ae5a-c4c1b1f20fb4"
+        ]
+      },
+      {
+        "id": "b168d946-7e71-4ec2-950c-e288701b2c0a",
+        "username": "alice",
+        "email": "alice@example.com",
+        "password": "123",
+        "roles": [
+          "USER"
+        ],
+        "groups": [
+          "ec0cf1d3-1a5a-4d12-ae5a-c4c1b1f20fb4"
+        ]
+      },
+      {
+        "id": "580d9d97-4ec6-4b15-9ec9-7a450597f49d",
+        "username": "james",
+        "email": "james@example.com",
+        "password": "123",
+        "roles": [
+          "USER"
+        ],
+        "groups": [
+          "ec0cf1d3-1a5a-4d12-ae5a-c4c1b1f20fb4"
+        ]
+      }
+    ],
+    "groups": [
+      {
+        "id": "ec0cf1d3-1a5a-4d12-ae5a-c4c1b1f20fb4",
+        "name": "G1",
+        "ownerUsername": "super",
+        "adminUsernames": [
+          "super",
+          "alice",
+          "james"
+        ],
+        "memberUsernames": [
+          "super",
+          "alice",
+          "james"
+        ]
+      }
+    ],
+    "channels": [
+      {
+        "id": "73fd1f47-bf36-4881-81f1-ed1bb1a443a1",
+        "groupId": "ec0cf1d3-1a5a-4d12-ae5a-c4c1b1f20fb4",
+        "name": "general",
+        "bannedUsernames": []
+      },
+      {
+        "id": "bcc27898-5340-4628-9ac8-51e1ded8d9dc",
+        "groupId": "ec0cf1d3-1a5a-4d12-ae5a-c4c1b1f20fb4",
+        "name": "general",
+        "bannedUsernames": []
+      }
+    ],
+    "messages": {
+      "73fd1f47-bf36-4881-81f1-ed1bb1a443a1": [
+        {
+          "id": "2d1bead0-3891-498a-a4e8-605ef63209f3",
+          "username": "super",
+          "text": "Hello.",
+          "ts": 1757145572972
+        },
+        {
+          "id": "f6c5d089-62ae-4878-947b-2dfbfb3e503f",
+          "username": "alice",
+          "text": "How are you?",
+          "ts": 1757151781976
+        },
+        {
+          "id": "b3d85d84-565f-4929-ac87-e82d5d30fddb",
+          "username": "alice",
+          "text": "I am texting on here",
+          "ts": 1757152338867
+        },
+        {
+          "id": "34641c6a-999a-48d7-94df-afed41f72315",
+          "username": "alice",
+          "text": "the messages are being kept in memory!!!!",
+          "ts": 1757243382539
+        },
+        {
+          "id": "52dbe9a7-6949-40dc-8945-5be54e7575d3",
+          "username": "james",
+          "text": "hi, my name is James",
+          "ts": 1757244409071
+        }
+      ],
+      "bcc27898-5340-4628-9ac8-51e1ded8d9dc": [
+        {
+          "id": "6e589aea-220f-402f-9adf-cc0fe77dd9c0",
+          "username": "james",
+          "text": "this is the second #general channel",
+          "ts": 1757244428427
+        }
+      ]
+    },
+    "reports": []
+  }
