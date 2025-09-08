@@ -1,0 +1,148 @@
+// styles.scss
+/* ---------- Global styles & CSS variables ---------- */
+:root{
+    --bg: #fff7fb;             
+    --surface: #ffffff;        
+    --text: #2a2342;           
+  
+    --primary: #e3b7ff;        
+    --primary-strong: #c89bff; 
+    --secondary: #ffc1e3;      
+    --accent: #b8c0ff;         
+    --success: #87e1cf;        
+    --danger: #ff9bb3;         
+  
+    --ring: rgba(200,155,255,.55);
+    --shadow: 0 10px 25px rgba(173, 120, 255, .18);
+    --radius-lg: 18px;
+    --radius-sm: 10px;
+  
+    --g1: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 45%, var(--accent) 100%);
+  }
+  
+  *{ box-sizing: border-box }
+  html, body { height: 100% }
+  body{
+    margin:0;
+    font-family: "Plus Jakarta Sans", "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(1200px 800px at -10% -20%, #ffe6f4 0%, transparent 60%),
+      radial-gradient(900px 700px at 110% -10%, #efe3ff 0%, transparent 60%),
+      radial-gradient(800px 900px at 50% 120%, #e7f7ff 0%, transparent 65%),
+      var(--bg);
+  }
+  
+  /* ---------- Layout helpers ---------- */
+  .container{
+    width: min(1100px, 92vw);
+    margin: 32px auto;
+  }
+  .stack{ display: grid; gap: 14px }
+  .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap }
+  
+  /* ---------- Cards ---------- */
+  .card{
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(200, 155, 255, .15);
+  }
+  .card.pad{ padding: 20px }
+  
+  /* ---------- Buttons ---------- */
+  .btn{
+    appearance: none;
+    border: 0;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .05s ease, box-shadow .2s ease, background .2s ease, opacity .2s ease;
+    will-change: transform;
+  }
+  .btn:active{ transform: translateY(1px) }
+  
+  .btn-primary{
+    background: var(--g1);
+    color:#2a2342;
+    box-shadow: 0 6px 18px rgba(236, 176, 255, .45);
+  }
+  .btn-primary:hover{ filter: brightness(1.05) }
+  
+  .btn-ghost{
+    background: rgba(255,255,255,.6);
+    border: 1px solid rgba(200,155,255,.35);
+    color: var(--text);
+  }
+  .btn-ghost:hover{ background: rgba(255,255,255,.9) }
+  
+  /* ---------- Inputs ---------- */
+  .input{
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(200,155,255,.35);
+    outline: none;
+    background: rgba(255,255,255,.75);
+    transition: box-shadow .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .input:focus{
+    border-color: var(--primary-strong);
+    box-shadow: 0 0 0 4px var(--ring);
+    background: #fff;
+  }
+  
+  /* ---------- Top bar ---------- */
+  .topbar{
+    position: sticky; top: 0; z-index: 5;
+    background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.6));
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(200,155,255,.2);
+  }
+  .brand{
+    font-weight: 800; letter-spacing: .3px;
+    background: var(--g1); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  
+  /* ---------- Lists ---------- */
+  .list{ display:grid; gap:10px }
+  .list-item{
+    padding: 14px 16px; border-radius: 14px;
+    background: rgba(255,255,255,.85);
+    border: 1px solid rgba(200,155,255,.25);
+    transition: transform .06s ease, background .2s ease, box-shadow .2s ease;
+    cursor: pointer;
+  }
+  .list-item:hover{
+    background: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(173,120,255,.16);
+  }
+  
+  /* ---------- Chat styles ---------- */
+  .chat-window{
+    height: 58vh;
+    overflow: auto;
+    padding: 12px;
+    border-radius: var(--radius-lg);
+    background: rgba(255,255,255,.7);
+    border: 1px solid rgba(200,155,255,.25);
+  }
+  .msg{
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: #fff;
+    border: 1px solid rgba(200,155,255,.2);
+    box-shadow: 0 4px 10px rgba(173,120,255,.12);
+  }
+  .msg .meta{
+    font-size: 12px; opacity:.7; margin-bottom: 4px;
+  }
+  
+  /* ---------- Small helpers ---------- */
+  h1,h2,h3{ margin: 8px 0 12px }
+  label{ font-weight: 600 }
+  hr{ border: none; border-top: 1px dashed rgba(200,155,255,.35); margin: 10px 0 }
+  .error{ color: #b03a64; background: #ffe6ef; border: 1px solid #ffc1d4; padding: 8px 12px; border-radius: 10px }
+  
