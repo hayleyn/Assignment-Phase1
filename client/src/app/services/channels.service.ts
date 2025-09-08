@@ -1,57 +1,33 @@
-// auth.service.ts
-// this file defines the AuthService which manages user authentication state and interacts with the ApiService for login/logout
+// channels.service.ts
+// this file defines the ChannelsService which manages channels and messages in the application
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
-import { ApiService } from './api.service';
-import { StorageService } from './storage.service';
-import { User } from '../models/user';
+import { HttpClient } from '@angular/common/http';
+import { Channel } from '../models/channel';
+import { Message } from '../models/message';
+import { Observable } from 'rxjs';
 
-type AuthState = { sessionToken: string; user: User };
-
-// AuthService class definition
+// ChannelsService class definition
 @Injectable({ providedIn: 'root' })
-export class AuthService {
-  currentUser$ = new BehaviorSubject<User | null>(null);
-  sessionToken: string | null = null;
-  user$: any;
+export class ChannelsService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private api: ApiService, private storage: StorageService) {
-    const saved = this.storage.get<AuthState>('auth');
-    if (saved) {
-      this.sessionToken = saved.sessionToken;
-      this.currentUser$.next(saved.user);
-      localStorage.setItem('token', saved.sessionToken);
-    }
+  listByGroup(groupId: string): Observable<Channel[]> {
+    return this.http.get<Channel[]>(`/api/channels/group/${groupId}`);
   }
 
-  login(username: string, password: string) {
-    return this.api.login(username, password).pipe(
-      tap((res: { token?: string; sessionToken?: string; user: User }) => {
-        const sessionToken = res.sessionToken ?? res.token;
-        if (!sessionToken) throw new Error('No session token returned');
-
-        this.sessionToken = sessionToken;
-        this.currentUser$.next(res.user);
-
-        localStorage.setItem('token', sessionToken);
-        this.storage.set<AuthState>('auth', { sessionToken, user: res.user });
-      })
-    );
+  create(groupId: string, name: string): Observable<Channel> {
+    return this.http.post<Channel>('/api/channels', { groupId, name });
   }
 
-  logout() {
-    if (this.sessionToken) this.api.logout().subscribe({ error: () => {} });
-    this.sessionToken = null;
-    localStorage.removeItem('token');
-    this.currentUser$.next(null);
-    this.storage.remove('auth');
+  getMessages(channelId: string): Observable<Message[]> {
+    return this.http.get<Message[]>(`/api/channels/${channelId}/messages`);
   }
 
-  hasRole(role: string) {
-    return this.currentUser$.value?.roles?.includes(role as any) ?? false;
+  sendMessage(channelId: string, text: string): Observable<Message> {
+    return this.http.post<Message>(`/api/channels/${channelId}/messages`, { text });
   }
 
-  isAuthed() {
-    return !!this.currentUser$.value;
+  deleteChannel(channelId: string): Observable<{ ok: boolean }> {
+    return this.http.delete<{ ok: boolean }>(`/api/channels/${channelId}`);
   }
 }

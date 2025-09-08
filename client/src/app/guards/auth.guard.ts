@@ -1,10 +1,14 @@
-// auth.interceptor.ts
-// this file is used in app.config.ts to add the Authorization header to all HTTP requests
-import { HttpInterceptorFn } from '@angular/common/http';
+// auth.guard.ts
+// this file is used in app.routes.ts to protect routes that require authentication
+import { Injectable } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
-export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const token = localStorage.getItem('token');
-  if (!token) return next(req);
-  return next(req.clone({ setHeaders: { Authorization: `Bearer ${token}` } }));
-};
-
+@Injectable({ providedIn: 'root' })
+export class AuthGuard implements CanActivate {
+  constructor(private auth: AuthService, private router: Router) {}
+  canActivate() {
+    if (this.auth.isAuthed()) return true;
+    this.router.navigate(['/login']); return false;
+  }
+}
