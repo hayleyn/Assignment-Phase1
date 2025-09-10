@@ -77,7 +77,7 @@ export class DashboardComponent implements OnInit {
   }
 
   isAdmin(): boolean {
-    return this.auth.hasRole('SUPER_ADMIN') || this.auth.hasRole('GROUP_ADMIN');
+    return this.auth.hasRole('SUPER') || this.auth.hasRole('GROUP_ADMIN');
   }
 
   open(g: Group): void {

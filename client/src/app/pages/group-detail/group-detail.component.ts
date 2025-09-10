@@ -93,8 +93,8 @@ export class GroupDetailComponent implements OnInit {
     // Load groups, find current, compute permissions
     this.groups.list().subscribe((gs: Group[]) => {
       this.currentGroup = gs.find(g => g.id === this.groupId) || null;
-      const me = this.auth.user$.value?.username ?? '';
-      const isSuper = this.auth.hasRole('SUPER_ADMIN');
+      const me = this.auth.currentUser$.value?.username ?? '';
+      const isSuper = this.auth.hasRole('SUPER');
       const isGroupAdmin = !!this.currentGroup?.adminUsernames.includes(me);
       const isOwner = this.currentGroup?.ownerUsername === me;
 
