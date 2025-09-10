@@ -1,4 +1,5 @@
 // server/server.js
+// this file sets up the Express server and integrates all route modules
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
